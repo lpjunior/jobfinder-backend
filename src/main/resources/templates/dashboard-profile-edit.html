@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Editar Perfil</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h2>Editar Perfil</h2>
+    <form th:action="@{/dashboard/profile/edit}" th:object="${user}" method="post" class="mt-4">
+        <div class="mb-3">
+            <label class="form-label">Nome</label>
+            <input th:field="*{firstName}" class="form-control" autofocus="autofocus" />
+            <div th:errors="*{firstName}" class="text-danger small"></div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Sobrenome</label>
+            <input th:field="*{lastName}" class="form-control"/>
+            <div th:errors="*{lastName}" class="text-danger small"></div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">E-mail</label>
+            <input th:field="*{email}" type="email" class="form-control"/>
+            <div th:errors="*{email}" class="text-danger small"></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+    </form>
+</div>
+</body>
+</html>
