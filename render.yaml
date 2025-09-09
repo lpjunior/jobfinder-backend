@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: jobfinder-backend
+    env: docker
+    plan: free
+    dockerfilePath: Dockerfile
+    autoDeploy: true
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: jobfinder-db
+          property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: jobfinder-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: jobfinder-db
+          property: password
+
+databases:
+  - name: jobfinder-db
+    plan: free
