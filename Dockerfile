@@ -1,12 +1,13 @@
+# Etapa de build
 FROM maven:3.9.11-eclipse-temurin-24 AS build
 WORKDIR /app
-COPY . .
-RUN chmod +x mvnw
-RUN ./mvnw -B clean package -DskipTests
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-FROM eclipse-temurin:24-jre
+## Etapa de execução
+FROM eclipse-temurin:24
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
-
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/app/app.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
